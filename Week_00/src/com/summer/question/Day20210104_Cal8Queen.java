@@ -6,17 +6,22 @@ package com.summer.question;
  * 回溯思想，每放一步之后进行判断是否合格
  * 用数组储存每一行的皇后的位置，可以快速进行判断是否存在皇后，也方便最后的输出
  */
-public class Day20210104 {
+public class Day20210104_Cal8Queen {
     //用于存储皇后位置的数据，下标是行数，存储的值是皇后在每行的位置下标
     int[] queenLocation = new int[8];
     int type = 0;
+
+
+    public void cal8Queen() {
+        queenMove(0);
+    }
 
     /**
      * 皇后移动
      *
      * @param row 移动的行数
      */
-    public void queenMove(int row) {
+    private void queenMove(int row) {
         //因为数组下标最多是7 ，当下标等8时，意味着全部的皇后已经就位
         if (row == 8) {
             showQueenLocation();
@@ -27,7 +32,7 @@ public class Day20210104 {
         for (int column = 0; column < 8; column++) {
             if (isOk(row, column)) {
                 //赋值皇后的位置
-                queenLocation[row]=column;
+                queenLocation[row] = column;
                 queenMove(row + 1);
             }
         }
@@ -39,7 +44,7 @@ public class Day20210104 {
      * 打印八皇后的解法位置
      */
     private void showQueenLocation() {
-        System.out.println("-------------------解法"+type+"-------------------------");
+        System.out.println("-------------------解法" + type + "-------------------------");
         for (int i = 0; i < queenLocation.length; i++) {
             for (int column = 0; column < 8; ++column) {
                 if (queenLocation[i] == column) {
@@ -67,17 +72,17 @@ public class Day20210104 {
                 return false;
             }
         }
-        int leftIndex=column;
-        int rightIndex=column;
-        for (int i = row-1; i >= 0; i--) {
+        int leftIndex = column;
+        int rightIndex = column;
+        for (int i = row - 1; i >= 0; i--) {
             //判断左上角是否有皇后
             --leftIndex;
-            if (queenLocation[i]==leftIndex){
+            if (queenLocation[i] == leftIndex) {
                 return false;
             }
             ++rightIndex;
             //判断右上角是否有皇后
-            if (queenLocation[i]==rightIndex){
+            if (queenLocation[i] == rightIndex) {
                 return false;
             }
         }
