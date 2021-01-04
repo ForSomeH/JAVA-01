@@ -7,8 +7,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Base64;
 
-import static com.sun.org.apache.xerces.internal.impl.dv.util.Base64.decode;
-
 /**
  * @author hongzhengwei
  * @desc 作业2：自定义的类加载器  	个Hello.class文件所有字节(x=255-x)
@@ -18,7 +16,7 @@ public class HelloClassLoader extends ClassLoader {
 	public static void main(String[] args) {
 		try {
 			// 加载并初
-			new HelloClassLoader().findClass("com.sun.MyHelloWorld").newInstance();
+			new com.sun.HelloClassLoader().findClass("com.sun.MyHelloWorld").newInstance();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
