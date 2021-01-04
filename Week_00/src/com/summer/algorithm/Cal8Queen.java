@@ -5,6 +5,7 @@ package com.summer.algorithm;
  */
 public class Cal8Queen {
     int[] result = new int[8];
+    int type = 1;
     /**
      * 判断在x行，y列放置棋子是否合适
      * @param x
@@ -57,6 +58,8 @@ public class Cal8Queen {
 
 
     private void printQueens(int[] result) { // 打印出一个二维矩阵
+        type++;
+
         for (int row = 0; row < 8; ++row) {
             for (int column = 0; column < 8; ++column) {
                 if (result[row] == column) System.out.print("Q ");
@@ -64,7 +67,7 @@ public class Cal8Queen {
             }
             System.out.println();
         }
-        System.out.println();
+        System.out.println("解法"+type);
     }
 
 }
