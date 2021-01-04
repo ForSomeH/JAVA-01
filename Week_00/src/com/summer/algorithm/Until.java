@@ -1,4 +1,4 @@
-package com.summer.test;
+package com.summer.algorithm;
 
 /**
  * 算法工具类
