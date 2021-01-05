@@ -6,7 +6,7 @@ package com.summer.question;
  * 回溯思想，每放一步之后进行判断是否合格
  * 用数组储存每一行的皇后的位置，可以快速进行判断是否存在皇后，也方便最后的输出
  */
-public class Day20210104_Cal8Queen {
+public class Day0104_Cal8Queen {
     //用于存储皇后位置的数据，下标是行数，存储的值是皇后在每行的位置下标
     int[] queenLocation = new int[8];
     int type = 0;

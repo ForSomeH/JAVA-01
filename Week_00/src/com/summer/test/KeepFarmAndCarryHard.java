@@ -1,6 +1,7 @@
 package com.summer.test;
 
-import com.summer.question.Day20210104_Cal8Queen;
+import com.summer.question.Day0104_Cal8Queen;
+import com.summer.question.Day0105_TwoSum;
 
 /**
  * 每日一练
@@ -8,8 +9,18 @@ import com.summer.question.Day20210104_Cal8Queen;
 public class KeepFarmAndCarryHard {
 
     public static void main(String[] args) {
+        boolean today = true;
+        boolean before = false;
         //八皇后问题
-        Day20210104_Cal8Queen day20210104Cal8Queen =new Day20210104_Cal8Queen();
-        day20210104Cal8Queen.cal8Queen();
+        if (before) {
+            Day0104_Cal8Queen day20210104Cal8Queen = new Day0104_Cal8Queen();
+            day20210104Cal8Queen.cal8Queen();
+        }
+        //两数求和的问题
+        if (today) {
+            Integer[] test = new Integer[]{-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,};
+            Day0105_TwoSum day0105_twoSum = new Day0105_TwoSum();
+            day0105_twoSum.checkNum(test, 4);
+        }
     }
 }
