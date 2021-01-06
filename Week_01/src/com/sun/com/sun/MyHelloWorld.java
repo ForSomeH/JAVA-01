@@ -9,10 +9,18 @@ public class MyHelloWorld {
 	static {
 		System.out.println("show test!");
 	}
-	public void test(){
+	public static void test(){
 		System.out.println("洪政伟太帅了！");
 	}
+
+	public void addString(){
+		String name="hongzw";
+		name+="zheng";
+		name=name+"wei";
+
+	}
 	public static void main(String[] args) {
+		test();
 		System.out.println("Hello Class Initialized!");
 		int end = 5;
 		int result = 0;
