@@ -37,7 +37,7 @@ public class HelloClassLoader extends ClassLoader {
 			path = Paths.get(new URI(myPath));
 			cLassBytes = Files.readAllBytes(path);
             for (byte cLassByte : cLassBytes) {
-                byte i = 255 - cLassByte;
+//                byte i = 255 - cLassByte;
             }
 			//将字节转换为int计算
 //			int old = byteArrayToInt(cLassBytes);
