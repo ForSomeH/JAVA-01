@@ -1,11 +1,11 @@
-package com.sun;
+package com.sun.task;
 
 /**
  * @author hongzhengwei
  * @desc 作业1：分析字节码作业
  * @date： 2020/11/21
  */
-public class MyHelloWorld {
+public class Task1_ByteForHelloWorld {
 	static {
 		System.out.println("show test!");
 	}
@@ -13,12 +13,20 @@ public class MyHelloWorld {
 		System.out.println("洪政伟太帅了！");
 	}
 
+	/**
+	 * 查看字符串拼接
+	 */
 	public void addString(){
 		String name="hongzw";
 		name+="zheng";
 		name=name+"wei";
 
 	}
+
+	/**
+	 * 加减乘除
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		test();
 		System.out.println("Hello Class Initialized!");
