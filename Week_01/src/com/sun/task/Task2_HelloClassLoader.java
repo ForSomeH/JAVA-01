@@ -1,6 +1,6 @@
 package com.sun.task;
 
-import com.sun.Decode;
+import com.sun.tool.Decode;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

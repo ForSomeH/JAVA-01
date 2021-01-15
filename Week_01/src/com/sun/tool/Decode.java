@@ -1,7 +1,5 @@
-package com.sun;
+package com.sun.tool;
 
-
-import com.sun.xml.internal.ws.util.StringUtils;
 
 import java.util.Base64;
 
