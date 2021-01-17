@@ -1,4 +1,4 @@
-package com.sun.tool;
+package com.summer.nettydemo.tool;
 
 public class test {
     public static void main(String[] args) {
