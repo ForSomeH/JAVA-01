@@ -1,13 +1,12 @@
 package com.summer.nettydemo.netty;
 
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.epoll.EpollChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
@@ -47,22 +46,17 @@ public class HttpServer {
                     .option(ChannelOption.SO_RCVBUF, 32 * 1024)
                     .option(ChannelOption.SO_SNDBUF, 32 * 1024)
                     .option(EpollChannelOption.SO_REUSEPORT, true)
-                    .option(EpollChannelOption.SO_KEEPALIVE, true);
+                    .option(EpollChannelOption.SO_KEEPALIVE, true)
+            .option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT);
 
             sb.group(bossGroup, workerGroup) // 绑定线程池
                     .channel(NioServerSocketChannel.class) // 指定使用的channel
                     .handler(new LoggingHandler(LogLevel.INFO))
                     //日志记录
-                    .childHandler(new ChannelInitializer<SocketChannel>() { // 绑定客户端连接时候触发操作
-                        @Override
-                        protected void initChannel(SocketChannel ch) throws Exception {
-                            System.out.println("connected...; Client:" + ch.remoteAddress());
-                            ch.pipeline().addLast(new HttpServerHandler()); // 客户端触发操作
-                        }
-                    });
+                    .childHandler(new HttpInitializer());
 
             Channel cf = sb.bind(port).sync().channel(); // 服务器异步创建绑定
-            System.out.println(HttpServer.class + " started and listen on " + cf.localAddress());
+            System.out.println("开启netty http服务器，监听地址和端口为 http://127.0.0.1:" + port + '/');
             cf.closeFuture().sync(); // 关闭服务器通道
         } finally {
             // 释放线程池资源

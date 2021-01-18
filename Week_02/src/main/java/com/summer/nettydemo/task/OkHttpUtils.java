@@ -21,13 +21,4 @@ public class OkHttpUtils {
     }
 
 
-    public static void main(String[] args) throws Exception {
-
-        String url = "https://square.github.io/okhttp/";
-        String text = OkHttpUtils.getAsString(url);
-        System.out.println("url: " + url + " ; response: \n" + text);
-
-        // 清理资源
-        OkHttpUtils.client = null;
-    }
 }

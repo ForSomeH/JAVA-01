@@ -69,11 +69,5 @@ public class HttpClientHelper {
         }
     }
 
-    public static void main(String[] args) throws Exception {
 
-        String url = "http://localhost:8801/";
-        String text = HttpClientHelper.getAsString(url);
-        System.out.println("url: " + url + " ; response: \n" + text);
-
-    }
 }
