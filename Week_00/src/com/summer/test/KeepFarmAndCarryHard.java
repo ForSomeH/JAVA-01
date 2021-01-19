@@ -1,5 +1,6 @@
 package com.summer.test;
 
+import com.summer.MyUtils.CustomStringUtils;
 import com.summer.question.Day0104_Cal8Queen;
 import com.summer.question.Day0105_TwoSum;
 import com.summer.question.Day0106_ThreeSum;
@@ -31,12 +32,16 @@ public class KeepFarmAndCarryHard {
             day0106_threeSum.checkNum(test, 4);
         }
         //01背包
-        if (today) {
-
+        if (before) {
             Day0107_01Package aPackage = new Day0107_01Package();
             aPackage.pickStoneCache(0,0);
             System.out.println("最大的重量是："+aPackage.maxWeight);
         }
+        System.out.println(CustomStringUtils.formatToMask(5,4,"142302199601210058"));
+        System.out.println(CustomStringUtils.desensitizedName("洪政伟"));
+        System.out.println(CustomStringUtils.desensitizedPhoneNumber("13110391023"));
+
+
 
     }
 }
