@@ -6,11 +6,10 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.handler.codec.http.*;
+import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.util.ReferenceCountUtil;
 import outbound.HttpOutboundServerHandlerOne;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,10 +46,8 @@ public class HttpInboundServerHandler extends ChannelInboundHandlerAdapter {
             FullHttpRequest fullHttpRequest = (FullHttpRequest) msg;
             //对输入进行过滤
             inputFilter.filter(fullHttpRequest, ctx);
-            //作业一
             handlerOne.handleTaskOne(fullHttpRequest, ctx);
-            //作业二
-//            handlerTwo.handle(fullHttpRequest,ctx,inputFilter);
+
         } finally {
             ReferenceCountUtil.release(msg);
         }

@@ -49,7 +49,7 @@ public class HttpEndpointRouterImpl implements HttpEndpointRouter {
      * @desc 轮训算法
      */
     @Override
-    public String RoundRobin(List<String> endpoints) {
+    public String roundRobin(List<String> endpoints) {
         int index = (randomRobbinIndex + 1) % endpoints.size();
         randomRobbinIndex = randomRobbinIndex+1;
         System.out.println("本次轮训的下标是：" + index+"游标是："+randomRobbinIndex);

@@ -1,3 +1,5 @@
+
+
 import inbound.HttpServer;
 
 import java.util.Arrays;
@@ -22,7 +24,7 @@ public class NettyGatewayServerApplication {
 
     public static void main(String[] args) {
         //初始化后端服务请求的数据
-        String proxyServers = System.getProperty("proxyServers","http://localhost:8088/api/hello,http://localhost:8803");
+        String proxyServers = System.getProperty("proxyServers", "http://localhost:8088/api/hello,http://localhost:8803");
         HttpServer server = new HttpServer(PROXY_PORT, Arrays.asList(proxyServers.split(",")));
         try {
             server.run();

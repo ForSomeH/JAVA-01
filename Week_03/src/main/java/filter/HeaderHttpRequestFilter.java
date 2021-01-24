@@ -11,9 +11,7 @@ import io.netty.handler.codec.http.FullHttpRequest;
 public class HeaderHttpRequestFilter implements HttpRequestFilter {
     @Override
     public void filter(FullHttpRequest fullRequest, ChannelHandlerContext ctx) {
-        //拦截test请求
-//        if (fullRequest.getUri().contains("/test")) {
             fullRequest.headers().set("requestFilter", "requestFilter");
-//        }
+
     }
 }

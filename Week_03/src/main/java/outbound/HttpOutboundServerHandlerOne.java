@@ -18,6 +18,7 @@ import router.HttpEndpointRouterImpl;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import static io.netty.handler.codec.http.HttpHeaderValues.KEEP_ALIVE;
@@ -55,24 +56,23 @@ public class HttpOutboundServerHandlerOne {
         //String value = getAsString("http://localhost:8088/api/hello");
         //作业2：进行路由器
 
-        String url = router.RoundRobin(this.backendUrls);
+        String url = router.roundRobin(this.backendUrls);
         String value = getAsString(url);
         try {
-            response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_0, HttpResponseStatus.OK, Unpooled.wrappedBuffer(value.getBytes("UTF-8")));
+            response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_0, HttpResponseStatus.OK, Unpooled.wrappedBuffer(value.getBytes(StandardCharsets.UTF_8)));
             response.headers().set("Content-Type", "application/json");
             response.headers().set("Content-Length", response.content().readableBytes());
             response.headers().set("requestFilter", fullHttpRequest.headers().get("requestFilter"));
             HttpResponseFilter outFilter = new HeaderHttpResponseFilter();
             outFilter.filter(response);
-        } catch (UnsupportedEncodingException e) {
-            System.out.println("处理测试结果出错");
-            e.printStackTrace();
         } finally {
             if (fullHttpRequest != null) {
                 if (!HttpUtil.isKeepAlive(fullHttpRequest)) {
                     ctx.write(response).addListener(ChannelFutureListener.CLOSE);
                 } else {
-                    response.headers().set(CONNECTION, KEEP_ALIVE);
+                    if(response!=null){
+                        response.headers().set(CONNECTION, KEEP_ALIVE);
+                    }
                     ctx.write(response);
                 }
             }
@@ -96,15 +96,7 @@ public class HttpOutboundServerHandlerOne {
         }
     }
 
-    /**
-     * 获取url请求
-     *
-     * @param backend
-     * @return
-     */
-    private String formatUrl(String backend) {
-        return backend.endsWith("/") ? backend.substring(0, backend.length() - 1) : backend;
-    }
+
 
 
 }

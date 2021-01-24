@@ -17,16 +17,13 @@ public interface HttpEndpointRouter {
      */
     String randomRoute(List<String> endpoints);
 
-    // LoadBalance
 
     /**
      * @author hongzhengwei
      * @create 2021/1/24 下午5:16
-     * @desc    轮训算法
+     * @desc 轮训算法
      **/
-    String RoundRobin(List<String> endpoints);
-    // - server01,20
-    // - server02,30
-    // - server03,50
+    String roundRobin(List<String> endpoints);
+
 
 }

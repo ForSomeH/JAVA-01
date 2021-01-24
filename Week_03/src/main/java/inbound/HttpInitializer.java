@@ -21,7 +21,6 @@ public class HttpInitializer extends ChannelInitializer<SocketChannel> {
     public void initChannel(SocketChannel ch) {
         ChannelPipeline p = ch.pipeline();
         p.addLast(new HttpServerCodec());
-        //p.addLast(new HttpServerExpectContinueHandler());
         p.addLast(new HttpObjectAggregator(1024 * 1024));
         //处理过程
         p.addLast(new HttpInboundServerHandler(this.backServerUrls));
