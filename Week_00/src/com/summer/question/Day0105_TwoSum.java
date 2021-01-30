@@ -14,7 +14,7 @@ public class Day0105_TwoSum {
     HashMap<Integer, Integer> result = new HashMap<>();
     List<List<Integer>> resultList = new ArrayList<>();
 
-    public List<List<Integer>> checkNum(Integer[] nums, Integer value,Integer unCheckIndex) {
+    public List<List<Integer>> checkNum(Integer[] nums, Integer value, Integer unCheckIndex) {
         if (nums == null) {
             return resultList;
         }
@@ -23,7 +23,7 @@ public class Day0105_TwoSum {
             return resultList;
         }
         for (int i = 0; i < nums.length; i++) {
-            if (unCheckIndex==i){
+            if (unCheckIndex == i) {
                 continue;
             }
             //若存在组合，结对存入散列表
@@ -50,6 +50,34 @@ public class Day0105_TwoSum {
         return resultList;
 
 
+    }
+
+    /**
+     * 给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 的那 两个 整数，并返回它们的数组下标。
+     * <p>
+     * 你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍。
+     * <p>
+     * 你可以按任意顺序返回答案。
+     *
+     * @param nums
+     * @param target
+     * @return
+     */
+
+    public int[] twoSum(int[] nums, int target) {
+        //key是值，value是下标
+        HashMap<Integer, Integer> result = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            //若存在组合，结对存入散列表
+            if (result.containsKey(target - nums[i])) {
+                int[] answer = new int[]{result.get(target - nums[i]), i};
+                return answer;
+            }
+            if (!result.containsKey(nums[i])) {
+                result.put(nums[i], i);
+            }
+        }
+        return null;
     }
 
 

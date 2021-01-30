@@ -26,10 +26,12 @@ public class KeepFarmAndCarryHard {
             day0105_twoSum.checkNum(test, 4,-1);
         }
         //三数求和的问题
-        if (before) {
+        if (today) {
             Integer[] test = new Integer[]{-1, -2,-3,0, 1, 2, 3, 4, 5, 6, 7, 8, 9,};
             Day0106_ThreeSum day0106_threeSum = new Day0106_ThreeSum();
             day0106_threeSum.checkNum(test, 4);
+            int[] nums = new int[]{-1,-2,-3,4,1,3,0,3,-2,1,-2,2,-1,1,-5,4,-3};
+            day0106_threeSum.threeSum(nums);
         }
         //01背包
         if (before) {
@@ -38,8 +40,8 @@ public class KeepFarmAndCarryHard {
             System.out.println("最大的重量是："+aPackage.maxWeight);
         }
         System.out.println(CustomStringUtils.formatToMask(5,4,"142302199601210058"));
-        System.out.println(CustomStringUtils.desensitizedName("洪政伟"));
-        System.out.println(CustomStringUtils.desensitizedPhoneNumber("13110391023"));
+//        System.out.println(CustomStringUtils.desensitizedName("洪政伟"));
+//        System.out.println(CustomStringUtils.desensitizedPhoneNumber("13110391023"));
 
 
 

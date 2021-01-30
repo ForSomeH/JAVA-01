@@ -1,6 +1,6 @@
 package com.summer.MyUtils;
 
-import org.apache.commons.lang.StringUtils;
+
 
 
 public class CustomStringUtils {
@@ -28,13 +28,13 @@ public class CustomStringUtils {
      * @Date 下午8:47 2021/1/19
      * @Param [fullName]
      **/
-    public static String desensitizedName(String fullName) {
-        if (StringUtils.isNotEmpty(fullName)) {
-            String name = StringUtils.left(fullName, 1);
-            return StringUtils.rightPad(name, StringUtils.length(fullName), "*");
-        }
-        return fullName;
-    }
+//    public static String desensitizedName(String fullName) {
+//        if (StringUtils.isNotEmpty(fullName)) {
+//            String name = StringUtils.left(fullName, 1);
+//            return StringUtils.rightPad(name, StringUtils.length(fullName), "*");
+//        }
+//        return fullName;
+//    }
 
 
     /**
@@ -44,10 +44,10 @@ public class CustomStringUtils {
      * @Date 下午9:17 2021/1/19
      * @Param [phoneNumber]
      **/
-    public static String desensitizedPhoneNumber(String phoneNumber) {
-        if (StringUtils.isNotEmpty(phoneNumber)) {
-            phoneNumber = phoneNumber.replaceAll("(\\w{3})\\w*(\\w{4})", "$1****$2");
-        }
-        return phoneNumber;
-    }
+//    public static String desensitizedPhoneNumber(String phoneNumber) {
+//        if (StringUtils.isNotEmpty(phoneNumber)) {
+//            phoneNumber = phoneNumber.replaceAll("(\\w{3})\\w*(\\w{4})", "$1****$2");
+//        }
+//        return phoneNumber;
+//    }
 }
