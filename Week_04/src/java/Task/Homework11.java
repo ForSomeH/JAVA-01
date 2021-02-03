@@ -14,7 +14,7 @@ import java.util.concurrent.locks.LockSupport;
  * 异步运行一个方法，拿到这个方法的返回值后，退出主线程？
  * <p>
  * <p>
- * 思路9，循环栅栏
+ * 思路11，循环栅栏
  */
 public class Homework11 {
 

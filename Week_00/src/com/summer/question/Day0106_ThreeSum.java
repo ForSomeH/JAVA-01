@@ -1,6 +1,7 @@
 package com.summer.question;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 三数求和，在数组中，存在任意三个数有a+b+c=d的情况，请找出所有的值，并且不能重复
@@ -87,7 +88,7 @@ public class Day0106_ThreeSum {
             if (dictAnswer.containsKey((target - nums[i]))) {
                 dictAnswer.put(target - nums[i], nums[i]);
             } else {
-                if (dictAnswer.get(nums[i])==null){
+                if (dictAnswer.get(nums[i]) == null) {
                     dictAnswer.put(nums[i], null);
                 }
             }
@@ -109,4 +110,54 @@ public class Day0106_ThreeSum {
         }
         return answer;
     }
+
+
+    /**
+     * 给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？请你找出所有和为 0 且不重复的三元组。
+     * 解题思路，先将数组进行排序，然后用头尾指针法进行查找
+     */
+    public static List<List<Integer>> threeSumSort(int[] nums) {
+        List<List<Integer>> answer = new ArrayList<>();
+        //对数组进行排序
+        Arrays.sort(nums);
+        if (nums.length < 3) {
+            return answer;
+        }
+        int head = 0;
+        int tail = 0;
+        int count = 0;
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            if (nums[i]>0){
+                break;
+            }
+            head = i + 1;
+            tail = nums.length - 1;
+            count = 0;
+            while (head < tail) {
+                count = nums[head] + nums[tail] + nums[i];
+                if (count == 0) {
+                    answer.add(Arrays.asList(nums[i],nums[head],nums[tail]));
+                    while (head<tail&&nums[head]==nums[head+1]){
+                        head++;
+                    }
+                    while(head<tail&&nums[tail]==nums[tail-1]){
+                        tail--;
+                    }
+                    head++;
+                    tail--;
+                } else if (count > 0) {
+                    tail--;
+                } else {
+                    head++;
+                }
+            }
+        }
+        answer = answer.stream().distinct().collect(Collectors.toList());
+        return answer;
+    }
+
+
 }

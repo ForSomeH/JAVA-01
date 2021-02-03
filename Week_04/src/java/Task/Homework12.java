@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutionException;
  * 异步运行一个方法，拿到这个方法的返回值后，退出主线程？
  * <p>
  * <p>
- * 思路9，线程的join
+ * 思路12，线程的join
  */
 public class Homework12 {
 
