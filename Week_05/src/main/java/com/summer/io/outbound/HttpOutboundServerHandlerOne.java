@@ -38,6 +38,7 @@ import static io.netty.handler.codec.http.HttpHeaderValues.KEEP_ALIVE;
 public class HttpOutboundServerHandlerOne {
     private CloseableHttpClient httpclient = HttpClients.createDefault();
     private List<String> backendUrls;
+    HttpResponseFilter outFilter;
     /**
      * 路由转发
      */
@@ -69,7 +70,6 @@ public class HttpOutboundServerHandlerOne {
             response.headers().set("Content-Type", "application/json");
             response.headers().set("Content-Length", response.content().readableBytes());
             response.headers().set("requestFilter", fullHttpRequest.headers().get("requestFilter"));
-            HttpResponseFilter outFilter = new HeaderHttpResponseFilter();
             outFilter.filter(response);
         } finally {
             if (fullHttpRequest != null) {

@@ -22,20 +22,12 @@ public class SpringTestApplication {
         //todo 作业3xml装配一组bean
         homeWork3(context);
         //todo 作业4将netty的inbound，outbound，filter，router交给spring管理
+        homeWork4(context);
         //todo   4.2 (挑战)基于 AOP 改造 Netty 网关，filter 和 router 使用 AOP 方式实现;
         //todo   4.3 (中级挑战)基于前述改造，将网关请求前后端分离，中级使用 JMS 传递消息;
         //todo   4.4 (中级挑战)尝试使用 ByteBuddy 实现一个简单的基于类的 AOP;
         //todo   4.5 (超级挑战)尝试使用 ByteBuddy 与 Instrument 实现一个简单 JavaAgent 实现无侵入 下的 AOP。
-        //netty改造
-        //初始化后端服务请求的数据
-        String proxyServers = System.getProperty("proxyServers", "http://localhost:8088/api/hello");
-        HttpServer server = (HttpServer) context.getBean("httpServer");
-        //HttpServer server = new HttpServer(2100, Arrays.asList(proxyServers.split(",")));
-        try {
-            server.run();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
 
     }
 
@@ -77,6 +69,21 @@ public class SpringTestApplication {
     static void homeWork3(ApplicationContext context) {
         Company gillion = context.getBean(Company.class);
         System.out.println(gillion);
+    }
+
+    /**
+     * @author hongzhengwei
+     * @create 2021/2/5 9:07 下午
+     * @desc 作业4，将netty的inbound，outbound，filter，router交给spring管理
+     **/
+    static void homeWork4(ApplicationContext context) {
+        //netty改造
+        HttpServer server = (HttpServer) context.getBean("httpServer");
+        try {
+            server.run();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

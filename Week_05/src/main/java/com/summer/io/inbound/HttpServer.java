@@ -35,10 +35,6 @@ public class HttpServer {
     private List<String> backServerUrls;
     @Autowired
     HttpInitializer httpInitializer;
-    public HttpServer(int port, List<String> backServerUrls) {
-        this.port = port;
-        this.backServerUrls = backServerUrls;
-    }
 
     boolean ssl;
 
