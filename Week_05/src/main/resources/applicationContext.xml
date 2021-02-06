@@ -51,7 +51,8 @@
             </list>
         </property>
     </bean>
-    <bean id="school" class="com.summer.beans.Company"></bean>
+    <bean id="gillion" class="com.summer.beans.Company"></bean>
+    <!--netty托管spring-->
     <bean id="httpServer" class="com.summer.io.inbound.HttpServer">
         <property name="port" value="2100"></property>
         <property name="httpInitializer" ref="httpInitializer"></property>
