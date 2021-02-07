@@ -1,7 +1,6 @@
 package com.summer.io.outbound;
 
 
-import com.summer.io.filter.HeaderHttpResponseFilter;
 import com.summer.io.filter.HttpResponseFilter;
 import com.summer.io.router.HttpEndpointRouter;
 import com.summer.io.router.HttpEndpointRouterImpl;
@@ -18,6 +17,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -39,6 +39,9 @@ public class HttpOutboundServerHandlerOne {
     private CloseableHttpClient httpclient = HttpClients.createDefault();
     private List<String> backendUrls;
     HttpResponseFilter outFilter;
+    FullHttpResponse response;
+    @Autowired
+    OutHandle outHandle;
     /**
      * 路由转发
      */
@@ -52,38 +55,18 @@ public class HttpOutboundServerHandlerOne {
     /**
      * @param fullHttpRequest 输入的请求
      * @param ctx             上下文
+     * @param backendUrls
      * @author hongzhengwei
      * @create 2021/1/24 上午11:53
-     * @desc 对输入的请求进行转发和处理增强
+     * @desc 对输入的请求进行转发和处理增强，方法前开启路由
      */
-    public void handleTaskOne(FullHttpRequest fullHttpRequest, ChannelHandlerContext ctx) throws IOException {
-        FullHttpResponse response = null;
-        //作业1：将固定回复替换为，http发起的后端请求
-        //String value = "hello hongzw";
-        //String value = getAsString("http://localhost:8088/api/hello");
-        //作业2：进行路由器
-
-        String url = router.roundRobin(this.backendUrls);
-        String value = getAsString(url);
-        try {
-            response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_0, HttpResponseStatus.OK, Unpooled.wrappedBuffer(value.getBytes(StandardCharsets.UTF_8)));
-            response.headers().set("Content-Type", "application/json");
-            response.headers().set("Content-Length", response.content().readableBytes());
-            response.headers().set("requestFilter", fullHttpRequest.headers().get("requestFilter"));
-            outFilter.filter(response);
-        } finally {
-            if (fullHttpRequest != null) {
-                if (!HttpUtil.isKeepAlive(fullHttpRequest)) {
-                    ctx.write(response).addListener(ChannelFutureListener.CLOSE);
-                } else {
-                    if(response!=null){
-                        response.headers().set(CONNECTION, KEEP_ALIVE);
-                    }
-                    ctx.write(response);
-                }
-            }
-        }
+    public void handleTaskOne(FullHttpRequest fullHttpRequest, ChannelHandlerContext ctx, String urlMsg, List<String> backendUrls) throws IOException {
+        String value = getAsString(urlMsg);
+        response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_0, HttpResponseStatus.OK, Unpooled.wrappedBuffer(value.getBytes(StandardCharsets.UTF_8)));
+        //开始输出增强
+        outHandle.handle(fullHttpRequest,response,ctx);
     }
+
 
 
     // GET 调用
@@ -101,8 +84,6 @@ public class HttpOutboundServerHandlerOne {
             }
         }
     }
-
-
 
 
 }

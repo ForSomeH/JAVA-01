@@ -15,15 +15,15 @@ public class SpringTestApplication {
     public static void main(String[] args) {
         //注册上下文
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        //todo 作业1：aop代理测试,xml+注解
+        //作业1：aop代理测试,xml+注解
         homeWork1(context);
-        //todo 作业2不同方式装配bean
+        //作业2不同方式装配bean
         homeWork2(context);
-        //todo 作业3xml装配一组bean
+        //作业3xml装配一组bean
         homeWork3(context);
-        //todo 作业4将netty的inbound，outbound，filter，router交给spring管理
+        //作业4将netty的inbound，outbound，filter，router交给spring管理
         homeWork4(context);
-        //todo   4.2 (挑战)基于 AOP 改造 Netty 网关，filter 和 router 使用 AOP 方式实现;
+        //4.2 (挑战)基于 AOP 改造 Netty 网关，filter 和 router 使用 AOP 方式实现;
         //todo   4.3 (中级挑战)基于前述改造，将网关请求前后端分离，中级使用 JMS 传递消息;
         //todo   4.4 (中级挑战)尝试使用 ByteBuddy 实现一个简单的基于类的 AOP;
         //todo   4.5 (超级挑战)尝试使用 ByteBuddy 与 Instrument 实现一个简单 JavaAgent 实现无侵入 下的 AOP。

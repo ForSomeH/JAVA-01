@@ -10,7 +10,7 @@
     <context:component-scan base-package="com.summer"/>
     <bean id="dinner" class="com.summer.business.Dinner"/>
     <!--自动扫描aop注解-->
-    <aop:aspectj-autoproxy/>
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
     <!--注解aop-->
     <bean id="aopByXml" class="com.summer.aop.AopByXml"/>
     <!--xml aop-->
