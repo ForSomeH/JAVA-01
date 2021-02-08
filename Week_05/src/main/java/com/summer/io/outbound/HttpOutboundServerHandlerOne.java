@@ -4,6 +4,7 @@ package com.summer.io.outbound;
 import com.summer.io.filter.HttpResponseFilter;
 import com.summer.io.router.HttpEndpointRouter;
 import com.summer.io.router.HttpEndpointRouterImpl;
+import com.summer.jms.SendService;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
@@ -64,25 +65,18 @@ public class HttpOutboundServerHandlerOne {
         String value = getAsString(urlMsg);
         response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_0, HttpResponseStatus.OK, Unpooled.wrappedBuffer(value.getBytes(StandardCharsets.UTF_8)));
         //开始输出增强
-        outHandle.handle(fullHttpRequest,response,ctx);
+        outHandle.handle(fullHttpRequest, response, ctx);
     }
 
 
+    @Autowired
+    SendService sendService;
 
     // GET 调用
     public String getAsString(String url) throws IOException {
-        HttpGet httpGet = new HttpGet(url);
-        CloseableHttpResponse response1 = null;
-        try {
-            response1 = httpclient.execute(httpGet);
-            System.out.println(response1.getStatusLine());
-            HttpEntity entity1 = response1.getEntity();
-            return EntityUtils.toString(entity1, "UTF-8");
-        } finally {
-            if (null != response1) {
-                response1.close();
-            }
-        }
+        //MQ进行解耦，将请求路径发消息出去
+        sendService.sendUrl(url);
+        return "异步发送成功";
     }
 
 

@@ -22,4 +22,12 @@ public class SendService {
             }
         });
     }
+
+    public void sendUrl(final String url) {
+        jmsTemplate.send("test.queue", new MessageCreator() {
+            public Message createMessage(Session session) throws JMSException {
+                return session.createObjectMessage(url);
+            }
+        });
+    }
 }

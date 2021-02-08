@@ -5,9 +5,14 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.IOException;
 
+/**
+ * @author  hongzhengwei
+ * @create  2021/2/7 2:26 下午
+ * @desc    消费者
+ **/
 public class JmsReceiver {
     
-    public static void main( String[] args ) throws IOException {
+    public static void main1( String[] args ) throws IOException {
         
         ApplicationContext context = new ClassPathXmlApplicationContext("classpath:springjms-receiver.xml");
         
