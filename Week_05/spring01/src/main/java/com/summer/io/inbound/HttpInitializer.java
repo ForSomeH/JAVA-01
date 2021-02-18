@@ -20,14 +20,16 @@ import java.util.List;
 @NoArgsConstructor
 public class HttpInitializer extends ChannelInitializer<SocketChannel> {
 
-    @Resource(name="urls")
+    @Resource(name = "urls")
     private List<String> backServerUrls;
 
     public HttpInitializer(List<String> backServerUrls) {
         this.backServerUrls = backServerUrls;
     }
+
     @Autowired
     HttpInboundServerHandler handler;
+
     @Override
     public void initChannel(SocketChannel ch) {
         ChannelPipeline p = ch.pipeline();

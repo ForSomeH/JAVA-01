@@ -19,6 +19,6 @@ public class Company {
     @Autowired
     List<Department> departments;
 
-    @Resource(name="boss")
+    @Resource(name = "boss")
     User boss;
 }

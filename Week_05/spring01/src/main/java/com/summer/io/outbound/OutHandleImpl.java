@@ -12,13 +12,13 @@ import static com.google.common.net.HttpHeaders.CONNECTION;
 import static io.netty.handler.codec.http.HttpHeaderValues.KEEP_ALIVE;
 
 @Service
-public class OutHandleImpl implements  OutHandle {
+public class OutHandleImpl implements OutHandle {
 
     /**
      * aop过滤
      */
     @Override
-    public void handle(FullHttpRequest fullHttpRequest,FullHttpResponse response,  ChannelHandlerContext ctx) {
+    public void handle(FullHttpRequest fullHttpRequest, FullHttpResponse response, ChannelHandlerContext ctx) {
         try {
             response.headers().set("Content-Type", "application/json");
             response.headers().set("Content-Length", response.content().readableBytes());

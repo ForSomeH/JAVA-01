@@ -15,5 +15,5 @@ public interface OutHandle {
     /**
      * aop过滤
      */
-    void handle( FullHttpRequest fullHttpRequest,FullHttpResponse response, ChannelHandlerContext ctx);
+    void handle(FullHttpRequest fullHttpRequest, FullHttpResponse response, ChannelHandlerContext ctx);
 }

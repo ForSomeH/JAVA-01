@@ -51,8 +51,8 @@ public class HttpEndpointRouterImpl implements HttpEndpointRouter {
     @Override
     public String roundRobin(List<String> endpoints) {
         int index = (randomRobbinIndex + 1) % endpoints.size();
-        randomRobbinIndex = randomRobbinIndex+1;
-        System.out.println("本次轮训的下标是：" + index+"游标是："+randomRobbinIndex);
+        randomRobbinIndex = randomRobbinIndex + 1;
+        System.out.println("本次轮训的下标是：" + index + "游标是：" + randomRobbinIndex);
         return endpoints.get(index);
     }
 }

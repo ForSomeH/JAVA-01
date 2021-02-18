@@ -29,7 +29,7 @@ public class JmsListener implements MessageListener {
         try {
             System.out.println("收到的信息：" + message.getObject());
             String asString = getAsString((String) message.getObject());
-            System.out.println("输出的结果"+asString);
+            System.out.println("输出的结果" + asString);
         } catch (JMSException | IOException e) {
             e.printStackTrace();
         }

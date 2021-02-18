@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class BeanInit {
 
-    @Bean(name="beanUser")
-    public User getUser(){
-        return  new User("hongzw","man",24);
+    @Bean(name = "beanUser")
+    public User getUser() {
+        return new User("hongzw", "man", 24);
     }
 }

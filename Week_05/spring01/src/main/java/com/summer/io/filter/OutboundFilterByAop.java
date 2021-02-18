@@ -42,18 +42,18 @@ public class OutboundFilterByAop {
         System.out.println("========>拦截前");
         //传入参数
         Object[] obj = joinPoint.getArgs();
-        String inputMsg=null;
+        String inputMsg = null;
 
         for (Object argItem : obj) {
             System.out.println("---->now-->argItem:" + argItem);
             if (argItem instanceof FullHttpRequest) {
-                FullHttpRequest request= (FullHttpRequest) argItem;
-                inputMsg=request.headers().get("AopRequestFilter");
+                FullHttpRequest request = (FullHttpRequest) argItem;
+                inputMsg = request.headers().get("AopRequestFilter");
             }
             if (argItem instanceof FullHttpResponse) {
-                FullHttpResponse response= (FullHttpResponse) argItem;
+                FullHttpResponse response = (FullHttpResponse) argItem;
                 response.headers().set("responseFilterAop", "responseFilterAop");
-                if (!StringUtils.isEmpty(inputMsg)){
+                if (!StringUtils.isEmpty(inputMsg)) {
                     response.headers().set("AopRequestFilter", inputMsg);
                 }
             }
@@ -62,7 +62,6 @@ public class OutboundFilterByAop {
         //切入方法执行
         joinPoint.proceed(obj);
     }
-
 
 
 }

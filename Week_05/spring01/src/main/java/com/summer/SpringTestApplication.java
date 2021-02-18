@@ -20,14 +20,14 @@ public class SpringTestApplication {
 
     public static void main(String[] args) throws Exception {
         //注册上下文
-        SpringTestApplication runApp=new SpringTestApplication();
+        SpringTestApplication runApp = new SpringTestApplication();
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         //【完成】作业1：aop代理测试,xml+注解
         runApp.homeWork1(context);
         //【完成】作业4.4 (中级挑战)尝试使用 ByteBuddy 实现一个简单的基于类的 AOP;
         runApp.homeWork44();
         //【完成】4.5 (超级挑战)尝试使用 ByteBuddy 与 Instrument 实现一个简单 JavaAgent 实现无侵入 下的 AOP。
-        AgentTest test= new AgentTest();
+        AgentTest test = new AgentTest();
         test.fun1();
         //作业2不同方式装配bean
         runApp.homeWork2(context);
@@ -46,7 +46,7 @@ public class SpringTestApplication {
      * @create 2021/2/5 9:07 下午
      * @desc 作业1，aop动态代理
      **/
-      void homeWork1(ApplicationContext context) {
+    void homeWork1(ApplicationContext context) {
         Dinner dinner = context.getBean(Dinner.class);
         System.out.println("Dinner对象AOP代理后的实际类型是否是Dinner子类：" + (dinner instanceof Dinner));
         dinner.eating();
@@ -57,7 +57,7 @@ public class SpringTestApplication {
      * @create 2021/2/5 9:07 下午
      * @desc 作业2不同方式装配bean
      **/
-      void homeWork2(ApplicationContext context) {
+    void homeWork2(ApplicationContext context) {
         //方式1：xml配置接口
         ISleep ISleep = context.getBean(ISleep.class);
         System.out.println(ISleep);
@@ -76,7 +76,7 @@ public class SpringTestApplication {
      * @desc 作业3，xml方式装配一组bean
      * xml装配bean Company->Department->User,其中company是注解，其余是xml指定
      **/
-      void homeWork3(ApplicationContext context) {
+    void homeWork3(ApplicationContext context) {
         Company gillion = context.getBean(Company.class);
         System.out.println(gillion);
     }
@@ -86,7 +86,7 @@ public class SpringTestApplication {
      * @create 2021/2/5 9:07 下午
      * @desc 作业4，将netty的inbound，outbound，filter，router交给spring管理
      **/
-      void homeWork4(ApplicationContext context) {
+    void homeWork4(ApplicationContext context) {
         //netty改造
         HttpServer server = (HttpServer) context.getBean("httpServer");
         try {
@@ -95,7 +95,8 @@ public class SpringTestApplication {
             e.printStackTrace();
         }
     }
-      void homeWork44() throws IllegalAccessException, InstantiationException {
+
+    void homeWork44() throws IllegalAccessException, InstantiationException {
         WorkService service = new ByteBuddy()
                 .subclass(WorkService.class)
                 .method(ElementMatchers.any())

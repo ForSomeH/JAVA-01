@@ -16,13 +16,14 @@ import java.util.Set;
 import static javassist.ClassPool.*;
 
 /**
- * @author  hongzhengwei
- * @create  2021/2/7 8:34 下午
- * @desc    增强
+ * @author hongzhengwei
+ * @create 2021/2/7 8:34 下午
+ * @desc 增强
  **/
 public class PerformMonitorTransformer implements ClassFileTransformer {
 
     private static final Set<String> classNameSet = new HashSet<>();
+
     static {
         classNameSet.add("com.summer.demo.AgentTest");
 //        classNameSet.add("com.summer.SpringTestApplication");
@@ -35,7 +36,7 @@ public class PerformMonitorTransformer implements ClassFileTransformer {
                             ProtectionDomain protectionDomain,
                             byte[] classfileBuffer) throws IllegalClassFormatException {
         try {
-            if(className==null){
+            if (className == null) {
                 return null;
             }
             String currentClassName = className.replaceAll("/", ".");
