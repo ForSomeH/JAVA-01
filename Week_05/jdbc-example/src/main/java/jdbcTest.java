@@ -1,7 +1,10 @@
 import bean.User;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import service.UserService;
 import service.impl.UserServiceImpl;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +16,11 @@ import java.util.List;
  **/
 public class jdbcTest {
     public static void main(String[] args) throws SQLException {
+//        jdbcExample();
+        dateSource();
+    }
+
+    static void jdbcExample() throws SQLException {
         List<User> result = new ArrayList<>(10);
         User user = new User("exception", 14, 18);
         User user2 = new User("exception", 15, 19);
@@ -23,12 +31,13 @@ public class jdbcTest {
         user.setAge(28);
         String updateSql = userService.update(user);
         String deleteSql = userService.delete(user);
-        DateSource dateSource = null;
+
+        DateSourceC dateSourceC = null;
         try {
-            dateSource = new DateSource();
-            Connection connection = dateSource.getConnection();
+            dateSourceC = new DateSourceC();
+            Connection connection = dateSourceC.getConnection();
             //创建一个preparedStatement
-            Statement stmt = dateSource.getStatement();
+            Statement stmt = dateSourceC.getStatement();
             int flag1 = stmt.executeUpdate(savaSql);
             int flag2 = stmt.executeUpdate(savaSql2);
             int flag3 = stmt.executeUpdate(updateSql);
@@ -48,7 +57,7 @@ public class jdbcTest {
             try (PreparedStatement ps = connection.prepareStatement("update user set age=? where id=?")) {
                 // 对同一个PreparedStatement反复设置参数并调用addBatch():
                 for (User s : result) {
-                    ps.setInt(1, s.getAge()+100);
+                    ps.setInt(1, s.getAge() + 100);
                     ps.setInt(2, s.getId());
                     ps.addBatch(); // 添加到batch
                 }
@@ -62,11 +71,37 @@ public class jdbcTest {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
-            dateSource.rollback();
+            dateSourceC.rollback();
             e.printStackTrace();
         } finally {
             //关闭资源
-            dateSource.closeResource();
+            dateSourceC.closeResource();
+        }
+    }
+
+    /**
+     * @author  hongzhengwei
+     * @create  2021/2/19 10:40 上午
+     * @desc    连接池
+     **/
+    static void dateSource() throws SQLException {
+        HikariConfig config = new HikariConfig();
+        config.setJdbcUrl("jdbc:mysql://localhost:3306/test");
+        config.setUsername("root");
+        config.setPassword("root");
+        config.addDataSourceProperty("connectionTimeout", "1000"); // 连接超时：1秒
+        config.addDataSourceProperty("idleTimeout", "60000"); // 空闲超时：60秒
+        config.addDataSourceProperty("maximumPoolSize", "10"); // 最大连接数：10
+        DataSource ds = new HikariDataSource(config);
+
+        try (Connection conn = ds.getConnection()) { // 在此获取连接
+            PreparedStatement ps = conn.prepareStatement("update user set age=33 where id=1");
+            ps.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            // 在此“关闭”连接
+            ds.getConnection().close();
         }
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  * @desc
  **/
 
-public class DateSource {
+public class DateSourceC {
     public static String url = "jdbc:mysql://localhost:3306/test";
     public static String username = "root";
     public static String password = "root";
@@ -17,7 +17,7 @@ public class DateSource {
     Statement stmt;
     ResultSet rs;
 
-    public DateSource() throws ClassNotFoundException {
+    public DateSourceC() throws ClassNotFoundException {
         //加载MySql的驱动类
         Class.forName("com.mysql.jdbc.Driver");
     }
