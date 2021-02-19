@@ -11,7 +11,7 @@
     <modules>
         <module>spring01</module>
         <module>spring02</module>
-        <module>study-spring-boot-starter</module>
+        <module>jdbc-example</module>
     </modules>
 
 
