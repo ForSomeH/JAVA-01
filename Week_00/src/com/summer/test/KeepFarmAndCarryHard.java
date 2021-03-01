@@ -11,7 +11,7 @@ import com.summer.question.Day0107_01Package;
  */
 public class KeepFarmAndCarryHard {
 
-    public static void main(String[] args) {
+    public  void main(String[] args) {
         boolean today = true;
         boolean before = false;
         //八皇后问题

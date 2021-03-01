@@ -65,16 +65,18 @@ public class Day0107_01Package {
     }
 
 
-    /**s
+
+    /**
+     * s
      * 选择最有价值的装法
      *
      * @param weight
      * @return
      * @
      */
-    public int pickMaxValue(int[] weights, int[] values, int weight, int value) {
+    public int pickMaxValue(int[] weights, int[] values, int weight) {
         //记录所有装法的价值
-        int[][] valueRecords = new int[5][weight + 1];
+        int[][] valueRecords = new int[weights.length][weight + 1];
         //初始化每一种装法的价值
         for (int i = 0; i < valueRecords.length; i++) {
             for (int i1 = 0; i1 < valueRecords[i].length; i1++) {
@@ -84,7 +86,7 @@ public class Day0107_01Package {
         //循环每一个石头
         valueRecords[0][0] = 0;
         //动态规划，状态转移
-        for (int i = 0; i < weights.length; i++) {
+        for (int i = 1; i < weights.length; ++i) {
             //不装这一个钻石
             for (int j = 0; j < weight; j++) {
                 if (valueRecords[i - 1][j] >= 0) {
@@ -93,7 +95,7 @@ public class Day0107_01Package {
             }
             //装这一个钻石
             for (int j = 0; j < weight; j++) {
-                if (valueRecords[i - 1][j] >= 0) {
+                if (valueRecords[i - 1][j] >= 0&&j + weights[i]<weight) {
                     //状态为上一层状态+这一次的状态
                     int newValue = valueRecords[i - 1][j] + values[i];
                     if (newValue > valueRecords[i][j + weights[i]]) {
@@ -111,6 +113,40 @@ public class Day0107_01Package {
         }
         return maxvalue;
     }
+
+
+    public  void main(String[] args) {
+        Day0107_01Package day0107_01Package=new Day0107_01Package();
+        System.out.println( day0107_01Package.longestPalindrome("longestaaPaalindrome"));
+
+    }
+
+    /**
+     * 最长回文子串
+     */
+
+        public String longestPalindrome(String s) {
+            int n = s.length();
+            boolean[][] dp = new boolean[n][n];
+            String ans = "";
+            for (int l = 0; l < n; ++l) {
+                for (int i = 0; i + l < n; ++i) {
+                    int j = i + l;
+                    if (l == 0) {
+                        dp[i][j] = true;
+                    } else if (l == 1) {
+                        dp[i][j] = (s.charAt(i) == s.charAt(j));
+                    } else {
+                        dp[i][j] = (s.charAt(i) == s.charAt(j) && dp[i + 1][j - 1]);
+                    }
+                    if (dp[i][j] && l + 1 > ans.length()) {
+                        ans = s.substring(i, i + l + 1);
+                    }
+                }
+            }
+            return ans;
+        }
+
 
 
 }
