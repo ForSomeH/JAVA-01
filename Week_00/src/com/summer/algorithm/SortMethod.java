@@ -7,7 +7,7 @@ package com.summer.algorithm;
  **/
 public class SortMethod {
 
-    public static void main(String[] args) {
+    public  void main(String[] args) {
         SortMethod sortMethod = new SortMethod();
         int[] nums = new int[]{7,11,7, 4, 2, 11,5, 3};
 //        int[] sort = sortMethod.selectionSort(nums, nums.length);
